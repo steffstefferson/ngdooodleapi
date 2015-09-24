@@ -1,0 +1,27 @@
+.content > div {
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    border: solid 1px grey;
+    float: left;
+    cursor: pointer;
+}
+
+h2 > span {
+    font-size: 18px;
+}
+
+.option_y {
+    background-color: limegreen;
+}
+
+.option_n {
+    background-color: orangered;
+}
+
+.option_m {
+    background-color: orange;
+}
+
+.option_q {
+    background-color: lightgrey;
+}

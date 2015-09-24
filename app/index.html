@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-app="testapp">
+    <!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+    <!-- Add your site or application content here -->
+    <h1>doodle test page</h1>
+    <div class="container" ng-controller="DoodleTestController as vm">
+        Load poll:
+        <input type="text" ng-model="vm.newkey" maxlength="16" />
+        <input type="button" value="ok" ng-click="vm.reloadPoll()" />
+        <br/>
+        <br/> {{vm.message}}
+
+        <br/>Direct link:<a ng-href="http://doodle.com/{{vm.key}}">http://doodle.com/{{vm.key}}</a>
+        <h2>Options <span ng-show="vm.selectedParticipant != null">colored for: {{vm.selectedParticipant.name}}</span></h2>
+        <div class="content">
+            <div ng-repeat="option in vm.api.getOptionsText()">
+                <span ng-click="vm.displayOption(option)" ng-class="vm.defineOptionClass($index)">{{ option }}</span>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <h2>Participants</h2>
+        <div class="content">
+            <div ng-repeat="participant in vm.api.getParticipants()">
+                <span ng-click="vm.selectParticipant(participant)">
+                    {{ participant.name }}
+                </span>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <h2>OptionDetail for: {{ vm.optionDetail.optionText }}</h3>
+        <div ng-repeat="option in vm.optionDetail.all()">
+                <div style="clear:both;"></div>
+            <h3>{{option.name}}</h3>
+            <div class="content">
+        <div ng-repeat="participant in option.participants">
+            <span ng-click="vm.selectParticipant(participant)">
+                {{ participant.name }}
+            </span>
+        </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- build:js scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+<script src="../bower_components/es5-shim/es5-shim.js"></script>
+<script src="../bower_components/json3/lib/json3.js"></script>
+<![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/lib/app.js"></script>
+    <script src="scripts/lib/PollService.js"></script>
+    <script src="scripts/testapp/testapp.js"></script>
+    <script src="scripts/testapp/doodleController.js"></script>
+    <!-- endbuild -->
+
+</body>
+
+</html>
